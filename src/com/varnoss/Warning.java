@@ -5,7 +5,7 @@ public class Warning {
 	String town = "";
 	String station = "";
 	String type = "";
-	String decs = "";
+	String desc = "";
 	String created = "";
 	
 	public String getTown() {
@@ -32,11 +32,11 @@ public class Warning {
 	public void setType(String type) {
 		this.type = type;
 	}
-	public String getDecs() {
-		return decs;
+	public String getDesc() {
+		return desc;
 	}
-	public void setDecs(String decs) {
-		this.decs = decs;
+	public void setDesc(String decs) {
+		this.desc = desc;
 	}
 }
 

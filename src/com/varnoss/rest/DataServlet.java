@@ -1,5 +1,6 @@
 package com.varnoss.rest;
 
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,10 +9,15 @@ import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
 import com.varnoss.Station;
+import com.varnoss.Stations;
 import com.varnoss.Warning;
+import com.varnoss.Warnings;
 import com.varnoss.sql.DBManager;
 
 @Path("/api")
@@ -28,6 +34,7 @@ public class DataServlet {
 
 	@GET
 	@Path("/warning/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
 	public Response getWarning(@QueryParam("id") String id) throws Exception {
 		Warning war = new Warning();
 		war = manager.getWarning(id);
@@ -36,21 +43,29 @@ public class DataServlet {
 
 	@GET
 	@Path("/warnings")
+	@Produces(MediaType.APPLICATION_JSON)
 	public Response getWarnings(
-			@DefaultValue("5") @QueryParam("amount") int amount, @QueryParam("stations") String s)
+			@DefaultValue("5") @QueryParam("amount") int amount,@DefaultValue("") @QueryParam("stations") String s)
 			throws Exception {
-		String[] _stations = parseStations(s);
+		String[] _stations = null;
 		List<Warning> wars = new ArrayList<Warning>();
-		wars = manager.getWarnings(amount, _stations);
-		return Response.ok(200).entity(wars).build();
+		if(s == null){
+			_stations = parseStations(s);
+			wars = manager.getWarnings(amount, _stations);
+		} else{
+			wars = manager.getWarnings(amount, null);
+		}
+		Warnings _warnings = new Warnings(wars);
+		return Response.ok(200).entity(_warnings).build();
 	}
 
 	@GET
 	@Path("/stations")
+	@Produces(MediaType.APPLICATION_JSON)
 	public Response getStations(@QueryParam("name") String name,
 			@QueryParam("town") String town, @QueryParam("type") String type,
 			@QueryParam("line") String line) throws Exception {
-		List<Station> _stations = new ArrayList<Station>();
+		Stations _stations = new Stations();
 		_stations = manager.getStations(name, town, type, line);
 		return Response.ok(200).entity(_stations).build();
 	}
