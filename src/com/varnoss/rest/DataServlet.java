@@ -45,15 +45,17 @@ public class DataServlet {
 	@Path("/warnings")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getWarnings(
-			@DefaultValue("5") @QueryParam("amount") int amount,@DefaultValue("") @QueryParam("stations") String s)
+			@DefaultValue("10") @QueryParam("amount") int amount,
+			@DefaultValue("") @QueryParam("stations") String s,
+			@DefaultValue("") @QueryParam("created") String created)
 			throws Exception {
 		String[] _stations = null;
 		List<Warning> wars = new ArrayList<Warning>();
-		if(s == null){
+		if (!s.equals("")) {
 			_stations = parseStations(s);
-			wars = manager.getWarnings(amount, _stations);
-		} else{
-			wars = manager.getWarnings(amount, null);
+			wars = manager.getWarnings(amount, _stations, created);
+		} else {
+			wars = manager.getWarnings(amount, null, created);
 		}
 		Warnings _warnings = new Warnings(wars);
 		return Response.ok(200).entity(_warnings).build();
@@ -69,8 +71,8 @@ public class DataServlet {
 		_stations = manager.getStations(name, town, type, line);
 		return Response.ok(200).entity(_stations).build();
 	}
-	
-	private String[] parseStations(String stations){
+
+	private String[] parseStations(String stations) {
 		String[] _stations = stations.split(",");
 		return _stations;
 	}
