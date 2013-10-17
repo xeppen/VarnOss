@@ -35,7 +35,7 @@ public class Warning {
 	public String getDesc() {
 		return desc;
 	}
-	public void setDesc(String decs) {
+	public void setDesc(String desc) {
 		this.desc = desc;
 	}
 }

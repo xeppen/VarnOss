@@ -24,7 +24,7 @@ public class JerseyClient {
 			cfg.getClasses().add(JacksonJsonProvider.class);
 			client = Client.create(cfg);
 			System.out.println("Cliented started!");
-			int i = 1;
+			int i = 3;
 			while (i != 4) {
 				if (i == 0) {
 					// POST Warning Input
@@ -91,7 +91,7 @@ public class JerseyClient {
 					String line = "Blå";
 					line = URLEncoder.encode(line, "UTF-8");
 					webResource = client
-							.resource("http://localhost:8080/varnoss/rest/api/warnings");
+							.resource("http://localhost:8080/varnoss/rest/api/warnings?created=2013-10-03%2000:00:00");
 
 					response = webResource.accept("application/json").get(
 							ClientResponse.class);
