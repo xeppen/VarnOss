@@ -18,7 +18,7 @@ import com.varnoss.Station;
 import com.varnoss.Stations;
 import com.varnoss.Warning;
 import com.varnoss.Warnings;
-import com.varnoss.sql.DBManager;
+import com.varnoss.database.DBManager;
 
 @Path("/api")
 public class DataServlet {
