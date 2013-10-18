@@ -66,9 +66,11 @@ public class DataServlet {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getStations(@QueryParam("name") String name,
 			@QueryParam("town") String town, @QueryParam("type") String type,
-			@QueryParam("line") String line) throws Exception {
+			@QueryParam("line") String line,
+			@QueryParam("sort") String sort)
+			throws Exception {
 		Stations _stations = new Stations();
-		_stations = manager.getStations(name, town, type, line);
+		_stations = manager.getStations(name, town, type, line, sort);
 		return Response.ok(200).entity(_stations).build();
 	}
 

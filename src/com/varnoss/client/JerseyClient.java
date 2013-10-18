@@ -91,7 +91,7 @@ public class JerseyClient {
 					String line = "Blå";
 					line = URLEncoder.encode(line, "UTF-8");
 					webResource = client
-							.resource("http://localhost:8080/varnoss/rest/api/warnings?created=2013-10-03%2000:00:00");
+							.resource("http://localhost:8080/varnoss/rest/api/stations");
 
 					response = webResource.accept("application/json").get(
 							ClientResponse.class);
@@ -104,8 +104,8 @@ public class JerseyClient {
 
 					String output = response.getEntity(String.class);
 					
-					//System.out.println("Output from Server .... \n");
-					//System.out.println(output);
+					System.out.println("Output from Server .... \n");
+					System.out.println(output);
 				}
 				i++;
 			}

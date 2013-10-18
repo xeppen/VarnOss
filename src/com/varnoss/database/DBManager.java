@@ -225,7 +225,7 @@ public class DBManager {
 	}
 
 	public Stations getStations(String name, String town, String type,
-			String line) throws Exception {
+			String line, String sort) throws Exception {
 		System.out.println("[DBManager] Fetching stations");
 		try {
 			Stations _stations = new Stations();
@@ -289,6 +289,11 @@ public class DBManager {
 					query = query + " AND line LIKE '" + line + "'";
 				}
 			}
+			if(sort != null){
+				query = query + " ORDER BY " + sort + ",name";
+			} else{
+				query = query + " ORDER BY name";
+			}
 			// -------------------//
 
 			// --- Fetch data ---//
@@ -297,6 +302,7 @@ public class DBManager {
 			// Result set get the result of the SQL query
 			String eQuery = "SELECT * FROM Stations";
 			eQuery = eQuery + query;
+			System.out.println("Query: " + eQuery);
 			resultSet = statement.executeQuery(eQuery);
 			while (resultSet.next()) {
 				Station s = new Station();
