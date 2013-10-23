@@ -25,13 +25,13 @@ public class JerseyClient {
 			client = Client.create(cfg);
 			System.out.println("Cliented started!");
 			int i = 3;
-			while (i != 4) {
+			while (i < 4) {
 				if (i == 0) {
 					// POST Warning Input
 					String input = "{\"town\":\"Stockholm\",\"station\":\"Odenplan\",\"type\":\"Ordningsvakt\",\"decs\":\"5-6 ordningsvakter plockar in bus pŒ gršna perrongen!\"}";
 
 					webResource = client
-							.resource("http://localhost:8080/varnoss/rest/api/warning");
+							.resource("http://localhost:8080/varnoss/rest/api/warning?created=2013-10-23%2009:26:05");
 
 					// POST method
 					response = webResource.accept("application/json")
@@ -91,7 +91,7 @@ public class JerseyClient {
 					String line = "BlŒ";
 					line = URLEncoder.encode(line, "UTF-8");
 					webResource = client
-							.resource("http://localhost:8080/varnoss/rest/api/stations");
+							.resource("http://localhost:8080/varnoss/rest/api/warnings?created=2013-10-23%2009:36:05");
 
 					response = webResource.accept("application/json").get(
 							ClientResponse.class);

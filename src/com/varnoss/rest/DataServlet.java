@@ -57,6 +57,7 @@ public class DataServlet {
 		} else {
 			wars = manager.getWarnings(amount, null, created);
 		}
+		System.out.println("wars: " + wars.size());
 		Warnings _warnings = new Warnings(wars);
 		return Response.ok(200).entity(_warnings).build();
 	}

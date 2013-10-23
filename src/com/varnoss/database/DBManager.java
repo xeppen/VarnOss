@@ -187,9 +187,9 @@ public class DBManager {
 			
 			if(!created.equals("")){
 				if(first){
-					query = query + " WHERE created >= '" + created + "'";
+					query = query + " WHERE created > '" + created + "'";
 				} else{
-					query = query + " AND created >= '" + created + "'";
+					query = query + " AND created > '" + created + "'";
 				}
 			}
 
